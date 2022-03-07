@@ -145,23 +145,18 @@ class FRaVGApp(QtWidgets.QMainWindow, mainwindow.Ui_MainWindow):
 
     def auth(self):
         self.dialog = QtWidgets.QDialog(self)
-        self.dialog.setWindowTitle('Авторизация')
+        self.dialog.setWindowTitle('Помощь')
         self.dialog.setModal(True)
-        fbox = QtWidgets.QFormLayout()
-        loginField = QtWidgets.QLineEdit()
-        passField = QtWidgets.QLineEdit()
-        passField.setEchoMode(QtWidgets.QLineEdit.Password)
-        fbox.addRow('&Имя пользователя:', loginField)
-        fbox.addRow('&Пароль:', passField)
-        hbox = QtWidgets.QHBoxLayout()
-        btnOK = QtWidgets.QPushButton('&OK')
-        btnCancel = QtWidgets.QPushButton('&Отмена')
-        hbox.addWidget(btnOK)
-        hbox.addWidget(btnCancel)
-        fbox.addRow(hbox)
-        self.dialog.setLayout(fbox)
-        btnCancel.clicked.connect(self.dialog.close)
-        btnOK.clicked.connect(lambda: self.isValid(loginField.text(), passField.text()))
+        txt = '''Эта программа для распознавания медицинской маски на лице человека. Основана на модели MobileVNet2. 
+        Программа работает в реальном режиме и транслирует видеоряд из веб-камеры с указанием наличия/не наличия медицинской маски на обнаруженных лицах людей.
+        FAQ
+        1. Если на главном экране нет ничего (Подключите веб-камеру, программа считывает изображение с первого устройства подключеннного к компьютеру).'''
+        helpText = QLabel()
+        helpText.setText(txt)
+        helpText.setAlignment(Qt.AlignCenter)
+        vbox = QtWidgets.QHBoxLayout()
+        vbox.addWidget(helpText)
+        self.dialog.setLayout(vbox)
         self.dialog.adjustSize()
         self.dialog.show()
         self.dialog.exec_()
