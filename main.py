@@ -65,8 +65,11 @@ class VideoThread(QThread):
         self._run_flag = True
 
     def run(self):
-        prototxtPath = r"face_detector\deploy.prototxt"
-        weightsPath = r"face_detector\res10_300x300_ssd_iter_140000.caffemodel"
+        # prototxtPath = r"face_detector\deploy.prototxt"
+        # weightsPath = r"face_detector\res10_300x300_ssd_iter_140000.caffemodel"
+        prototxtPath = os.path.join(os.getcwd(), 'face_detector', 'deploy.prototxt')
+        weightsPath = os.path.join(os.getcwd(), 'face_detector', 'res10_300x300_ssd_iter_140000.caffemodel')
+
         faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
 
         maskNet = load_model("model.model")
